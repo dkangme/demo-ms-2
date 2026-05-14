@@ -1,0 +1,161 @@
+# API_CONTRACT.md
+
+Base path: `/clientes`
+
+All endpoints return JSON unless otherwise stated. Error responses follow FastAPI standard format: `{"detail": "mensaje"}`.
+
+---
+
+## POST /clientes
+**Create a new client.**
+
+- **Method:** `POST`
+- **Path:** `/clientes`
+- **Auth:** No
+
+### Request Body (`ClienteCreate`)
+
+| Field        | Type   | Required | Description                                   |
+|--------------|--------|----------|-----------------------------------------------|
+| rut          | string | Yes      | RUT chileno, format `XX.XXX.XXX-X`            |
+| nombres      | string | Yes      | First name(s)                                 |
+| apellidos    | string | Yes      | Last name(s)                                  |
+| correo       | string (email) | Yes | Email address                                 |
+| telefono     | string | Yes      | Phone number (9-15 chars)                     |
+
+### Response Body (`ClienteResponse`)
+
+| Field        | Type   | Description                                   |
+|--------------|--------|-----------------------------------------------|
+| id           | string | Auto-generated ID                             |
+| rut          | string | RUT chileno                                   |
+| nombres      | string | First name(s)                                 |
+| apellidos    | string | Last name(s)                                  |
+| correo       | string (email) | Email address                                 |
+| telefono     | string | Phone number                                  |
+| created_at   | string (datetime, ISO 8601) | Creation timestamp              |
+| updated_at   | string (datetime, ISO 8601) | Last update timestamp            |
+
+### Status Codes
+
+| Code | Description                                       |
+|------|---------------------------------------------------|
+| 201  | Created – returns `ClienteResponse`               |
+| 409  | Conflict – email already registered               |
+| 422  | Unprocessable Entity – RUT validation or data format error |
+
+---
+
+## GET /clientes
+**List all clients (paginated).**
+
+- **Method:** `GET`
+- **Path:** `/clientes`
+- **Auth:** No
+
+### Query Parameters
+
+| Param  | Type    | Required | Default | Description                           |
+|--------|---------|----------|---------|---------------------------------------|
+| skip   | integer | No       | 0       | Number of records to skip             |
+| limit  | integer | No       | 100     | Maximum number of records to return   |
+
+### Response Body
+
+Array of `ClienteResponse` objects (see [POST /clientes](#post-clientes) for schema).
+
+### Status Codes
+
+| Code | Description                          |
+|------|--------------------------------------|
+| 200  | OK – returns `List[ClienteResponse]` |
+
+---
+
+## GET /clientes/{cliente_id}
+**Get a single client by ID.**
+
+- **Method:** `GET`
+- **Path:** `/clientes/{cliente_id}`
+- **Auth:** No
+
+### Path Parameters
+
+| Param        | Type   | Required | Description          |
+|--------------|--------|----------|----------------------|
+| cliente_id   | string | Yes      | Client document ID   |
+
+### Response Body
+
+`ClienteResponse` (see [POST /clientes](#post-clientes) for schema).
+
+### Status Codes
+
+| Code | Description                     |
+|------|---------------------------------|
+| 200  | OK – returns `ClienteResponse`  |
+| 404  | Not Found                       |
+
+---
+
+## PUT /clientes/{cliente_id}
+**Update an existing client (partial update).**
+
+- **Method:** `PUT`
+- **Path:** `/clientes/{cliente_id}`
+- **Auth:** No
+
+### Path Parameters
+
+| Param        | Type   | Required | Description          |
+|--------------|--------|----------|----------------------|
+| cliente_id   | string | Yes      | Client document ID   |
+
+### Request Body (`ClienteUpdate`) – all fields optional
+
+| Field        | Type             | Required | Description                                   |
+|--------------|------------------|----------|-----------------------------------------------|
+| rut          | string           | No       | RUT chileno, format `XX.XXX.XXX-X`            |
+| nombres      | string           | No       | First name(s)                                 |
+| apellidos    | string           | No       | Last name(s)                                  |
+| correo       | string (email)   | No       | Email address                                 |
+| telefono     | string           | No       | Phone number (9-15 chars)                     |
+
+### Response Body
+
+`ClienteResponse` (see [POST /clientes](#post-clientes) for schema) – returns the updated client.
+
+### Status Codes
+
+| Code | Description                                                   |
+|------|---------------------------------------------------------------|
+| 200  | OK – returns updated `ClienteResponse`                        |
+| 404  | Not Found                                                     |
+| 409  | Conflict – attempt to change email to an already existing one |
+| 422  | Unprocessable Entity – validation error (RUT, format)         |
+
+---
+
+## DELETE /clientes/{cliente_id}
+**Delete a client.**
+
+- **Method:** `DELETE`
+- **Path:** `/clientes/{cliente_id}`
+- **Auth:** No
+
+### Path Parameters
+
+| Param        | Type   | Required | Description          |
+|--------------|--------|----------|----------------------|
+| cliente_id   | string | Yes      | Client document ID   |
+
+### Response Body
+
+No content.
+
+### Status Codes
+
+| Code | Description   |
+|------|---------------|
+| 204  | No Content    |
+| 404  | Not Found     |

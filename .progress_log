@@ -1,0 +1,87 @@
+{
+  "project_id": "f71ab24d-9eba-4c2d-aca7-85732443c3ca",
+  "project_name": "Demo MS 2",
+  "goal": "Implementar el proyecto: Demo MS 2\n\nVisión: El proyecto consiste en construir un microservicio CRUD de la entidad Cliente (id, rut chileno, nombres, apellidos, correo, teléfono) utilizando Python 3.11, FastAPI, Firestore y desplegado serverless en GCP Cloud Run, con el objetivo principal de validar ",
+  "last_updated": "2026-05-14T15:36:22.731307Z",
+  "total_items": 5,
+  "completed_count": 5,
+  "status": "completed",
+  "current_item_index": 5,
+  "spec_file": "SPEC.md",
+  "plan_file": "DEVELOPMENT_PLAN.md",
+  "contract_manifest_available": true,
+  "all_files_created": [
+    "backend/models.py",
+    "backend/validators.py",
+    "backend/db.py",
+    "backend/services.py",
+    "backend/routers/cliente.py",
+    "backend/main.py",
+    "backend/requirements.txt",
+    "backend/Dockerfile",
+    "docker-compose.yml",
+    "README.md",
+    ".env.example",
+    ".gitignore",
+    "run.sh"
+  ],
+  "items": [
+    {
+      "item_number": 1,
+      "title": "Foundation — Data models, RUT validation, and Firestore client initialization",
+      "wave": 1,
+      "files_created": [
+        "backend/models.py",
+        "backend/validators.py",
+        "backend/db.py"
+      ],
+      "completed_at": "2026-05-14T15:23:18.693803Z"
+    },
+    {
+      "item_number": 2,
+      "title": "Backend Service — Service layer, API router, application entrypoint, Dockerfile, and dependencies",
+      "wave": 2,
+      "files_created": [
+        "backend/services.py",
+        "backend/routers/cliente.py",
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile"
+      ],
+      "completed_at": "2026-05-14T15:30:05.168066Z"
+    },
+    {
+      "item_number": 3,
+      "title": "Infrastructure & Deployment — Local orchestration, environment configuration, and documentation",
+      "wave": 3,
+      "files_created": [
+        "docker-compose.yml",
+        "README.md",
+        ".env.example",
+        ".gitignore",
+        "run.sh"
+      ],
+      "completed_at": "2026-05-14T15:33:24.151672Z"
+    },
+    {
+      "item_number": 4,
+      "title": "Recovery Attempt 1/2: Fix Missing/Defective Files",
+      "wave": 1,
+      "files_created": [
+        "backend/db.py",
+        "backend/services.py"
+      ],
+      "completed_at": "2026-05-14T15:34:37.440687Z"
+    },
+    {
+      "item_number": 5,
+      "title": "Recovery Attempt 2/2: Fix Missing/Defective Files",
+      "wave": 1,
+      "files_created": [
+        "backend/db.py",
+        "backend/services.py"
+      ],
+      "completed_at": "2026-05-14T15:36:22.731307Z"
+    }
+  ]
+}
